@@ -1,0 +1,52 @@
+.container {
+  max-width: 100%;
+  margin: 10px auto;
+}
+
+.container:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.grid {
+  float: left;
+  width: 60%;
+  margin-left: 20%;
+}
+
+.instructions {
+  float: left;
+  width: 20%;
+}
+
+table {
+  margin: auto;
+}
+
+table tr td {
+  height: 5px;
+  width: 5px;
+  padding: 10px;
+  border: 2px solid #ccc;
+}
+
+table tr td.snake {
+  background-color: blue;
+}
+
+table tr td.apple {
+  background-color: red;
+}
+
+.btn {
+  background-color: white;
+  text-decoration: none;
+  border: 1px solid #777;
+  padding: 10px;
+  border-radius: 3px;
+}
+
+.reset {
+  display: none;
+}
