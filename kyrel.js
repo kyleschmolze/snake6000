@@ -2,14 +2,14 @@ var tickInterval;
 var apples = [];//[5,6];
 var snakeLength = 3;
 var snakeDirection = [1, 0];
-var size = 100;
+var size = 40;
 
 var snakePath = [ [2,0], [1,0], [0,0] ];
 
 $(document).ready(function() {
   setupGrid();
-  //tickInterval = setInterval(tick, 30);
-  for(var i = 0; i < 6000; i++) {
+  tickInterval = setInterval(tick, 30);
+  for(var i = 0; i < 70; i++) {
     placeNewApple()
   }
 
@@ -38,7 +38,6 @@ function tick() {
 function moveSnake() {
   currentPosition = snakePath[0]
   nextPosition = [ currentPosition[0] + snakeDirection[0], currentPosition[1] + snakeDirection[1] ]
-  console.log('next', nextPosition);
   snakePath.unshift(nextPosition)
 
   $("td").removeClass('snake')
@@ -52,8 +51,9 @@ function checkForApple() {
   for(var i = 0; i < apples.length; i++) {
     apple = apples[i]
     if(apple[0] == currentPosition[0] && apple[1] == currentPosition[1]) {
-      placeNewApple()
+      console.log(apple)
       removeApple(apple)
+      //placeNewApple()
       snakeLength++
     }
   }
@@ -65,6 +65,7 @@ function removeApple(apple) {
 
 function placeNewApple() {
   apple = [ parseInt(Math.random() * size), parseInt(Math.random() * size) ]
+  apples.push(apple)
   $("tr").eq(apple[1]).find("td").eq(apple[0]).addClass('apple')
 }
 
@@ -81,8 +82,6 @@ function setupGrid() {
 }
 
 function checkForCollisions() {
-  console.log('check')
-  console.log(snakePath)
   currentPosition = snakePath[0]
   if(currentPosition[0] < 0 || currentPosition[0] >= size || currentPosition[1] < 0 || currentPosition[1] >= size) {
     gameOver();
@@ -90,7 +89,6 @@ function checkForCollisions() {
 
   for(var i = 1; i < snakeLength; i++) {
     bodyPart = snakePath[i]
-    console.log(bodyPart, currentPosition);
     if(bodyPart[0] == currentPosition[0] && bodyPart[1] == currentPosition[1]) {
       gameOver();
     }
